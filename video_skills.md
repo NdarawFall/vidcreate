@@ -25,3 +25,4 @@ Ce fichier sert de base de connaissances pour Gemini CLI et Antigravity. Il déf
 2. Utiliser la classe `.clip` pour les éléments timés.
 3. Préférer les animations `gsap.from()` pour les entrées.
 4. Pas de `Math.random()` pour rester déterministe.
+5. **Gestion de Projets** : Ne jamais écraser `index.html` à la racine pour un nouveau projet. Créer un dossier spécifique dans `projects/` (ex: `projects/mon-nouveau-video/index.html`).

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Intro True Crime - Les Ombres du Passé</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Oswald:wght@700&display=swap');
+
+        body {
+            margin: 0;
+            background: #050505;
+            color: #e2e2e2;
+            font-family: 'Special+Elite', Courier, monospace;
+            overflow: hidden;
+        }
+
+        [data-composition-id="true-crime-intro"] {
+            width: 1920px;
+            height: 1080px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(138, 0, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 1) 0%, #050505 100%);
+        }
+
+        /* Effet de grain de film */
+        .overlay-grain {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .scene-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+            z-index: 5;
+        }
+
+        .category {
+            font-size: 24px;
+            letter-spacing: 12px;
+            color: #8b0000; /* Rouge sang sombre */
+            text-transform: uppercase;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .main-title {
+            font-size: 110px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -2px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            line-height: 0.9;
+            filter: drop-shadow(0 0 15px rgba(0,0,0,0.8));
+        }
+
+        .date-location {
+            font-size: 28px;
+            color: #666;
+            margin-top: 20px;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+
+        /* Effet de lampe torche / vignetage */
+        .vignette {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            box-shadow: inset 0 0 300px rgba(0,0,0,1);
+            pointer-events: none;
+            z-index: 6;
+        }
+    </style>
+</head>
+<body>
+    <div data-composition-id="true-crime-intro" data-width="1920" data-height="1080">
+        <div class="overlay-grain"></div>
+        <div class="vignette"></div>
+
+        <div class="scene-content clip" data-start="0" data-duration="10" data-track-index="0">
+            <p class="category" id="cat">Dossier Classé</p>
+            <h1 class="main-title" id="title">LES OMBRES<br>DU PASSÉ</h1>
+            <p class="date-location" id="info">MARSEILLE, 1984 — AFFAIRE NON RÉSOLUE</p>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+        <script>
+            window.__timelines = window.__timelines || {};
+            const tl = gsap.timeline({ paused: true });
+            window.__timelines["true-crime-intro"] = tl;
+
+            // Animation d'ambiance (clignotement léger)
+            tl.to("[data-composition-id]", {
+                backgroundColor: "#0a0a0a",
+                duration: 0.1,
+                repeat: 100,
+                yoyo: true,
+                ease: "none"
+            }, 0);
+
+            // Entrée des textes
+            tl.from("#cat", { 
+                opacity: 0, 
+                letterSpacing: "30px",
+                duration: 2, 
+                ease: "power2.out" 
+            }, 0.5);
+
+            tl.from("#title", { 
+                y: 30, 
+                opacity: 0, 
+                scale: 1.1,
+                duration: 2.5, 
+                ease: "power4.out" 
+            }, 1.2);
+
+            tl.from("#info", { 
+                opacity: 0, 
+                duration: 1.5, 
+                ease: "power1.inOut" 
+            }, 2.5);
+
+            // Effet de "glitch" ou de flash sur le titre
+            tl.to("#title", {
+                opacity: 0.7,
+                duration: 0.05,
+                repeat: 5,
+                yoyo: true,
+                ease: "none"
+            }, 4);
+
+            // Zoom lent (Ken Burns)
+            tl.to(".scene-content", {
+                scale: 1.05,
+                duration: 10,
+                ease: "none"
+            }, 0);
+        </script>
+    </div>
+</body>
+</html>
