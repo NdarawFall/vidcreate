@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html data-composition-variables='[
-  {"id":"userName","type":"string","label":"Nom utilisateur","default":"Aventurier"},
-  {"id":"accentColor","type":"color","label":"Couleur d accent","default":"#3b82f6"}
-]'>
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>VidCreate SaaS Template</title>
+    <title>VidCreate - Visual Experience</title>
     <style>
         body {
             margin: 0;
-            background: #0f172a;
+            background: #000;
             color: white;
             font-family: 'Inter', system-ui, sans-serif;
             overflow: hidden;
@@ -22,113 +19,77 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
         }
 
         .scene-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 40px;
+            gap: 20px;
             text-align: center;
         }
 
-        .greeting {
-            font-size: 120px;
-            font-weight: 800;
+        .title {
+            font-size: 140px;
+            font-weight: 900;
             margin: 0;
-            background: linear-gradient(to bottom, #ffffff, #94a3b8);
+            letter-spacing: -4px;
+            background: linear-gradient(45deg, #fff 30%, #555 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .name-highlight {
-            font-size: 160px;
-            font-weight: 900;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-        }
-
-        .tagline {
-            font-size: 48px;
-            color: #64748b;
-            font-weight: 500;
-        }
-
-        .logo-box {
-            position: absolute;
-            top: 80px;
-            left: 80px;
-            font-weight: 700;
+        .subtitle {
             font-size: 32px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            color: #888;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
         }
 
-        .logo-circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .accent-line {
+            width: 100px;
+            height: 4px;
+            background: #fff;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
     <div data-composition-id="root" data-width="1920" data-height="1080">
-        <div class="logo-box clip" data-start="0" data-duration="10" data-track-index="1">
-            <div class="logo-circle" id="logoCircle"></div>
-            <span>VidCreate</span>
-        </div>
-
         <div class="scene-content clip" data-start="0.5" data-duration="9.5" data-track-index="0">
-            <p class="greeting" id="greetingText">BIENVENUE</p>
-            <h1 class="name-highlight" id="nameDisplay"></h1>
-            <p class="tagline" id="taglineText">Votre vidéo personnalisée est prête.</p>
+            <h1 class="title" id="mainTitle">VIDCREATE</h1>
+            <p class="subtitle" id="subTitle">Motion Design Experience</p>
+            <div class="accent-line" id="line"></div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
         <script>
-            // 1. Récupération des variables SaaS
-            const { userName, accentColor } = window.__hyperframes.getVariables();
-            
-            document.getElementById('nameDisplay').textContent = userName;
-            document.getElementById('nameDisplay').style.color = accentColor;
-            document.getElementById('logoCircle').style.backgroundColor = accentColor;
-
-            // 2. Enregistrement de la Timeline
             window.__timelines = window.__timelines || {};
             const tl = gsap.timeline({ paused: true });
             window.__timelines["root"] = tl;
 
-            // 3. Animations d'entrée
-            tl.from(".logo-box", { 
-                y: -20, 
+            tl.from("#mainTitle", { 
+                y: 100, 
                 opacity: 0, 
-                duration: 0.8, 
-                ease: "power3.out" 
-            }, 0.2);
-
-            tl.from("#greetingText", { 
-                y: 50, 
-                opacity: 0, 
-                duration: 1, 
+                duration: 1.5, 
                 ease: "expo.out" 
             }, 0.5);
 
-            tl.from("#nameDisplay", { 
-                scale: 0.8, 
+            tl.from("#subTitle", { 
+                letterSpacing: "20px",
                 opacity: 0, 
-                duration: 1.2, 
-                ease: "back.out(1.7)" 
-            }, 0.8);
+                duration: 2, 
+                ease: "power2.out" 
+            }, 1.0);
 
-            tl.from("#taglineText", { 
-                y: 30, 
+            tl.from("#line", { 
+                scaleX: 0,
                 opacity: 0, 
                 duration: 1, 
-                ease: "power2.out" 
-            }, 1.2);
+                ease: "power3.inOut" 
+            }, 1.5);
         </script>
     </div>
 </body>
